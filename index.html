@@ -3,14 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Three.js Example</title>
-  <style>
+  <title>Interactive Night Sky</title>
+  <!-- <style>
     body { margin: 0; }
     canvas { display: block; }
-  </style>
+  </style> -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="bg.js"></script>
+  <div class="sky">
+    <div class="stars"></div>
+    <div class="comet"></div>
+    <div class="moving-stars"></div>
+    <div class="moon" id="moon"></div>
+    <div class="phrase"></div>
+  </div>
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
+  <script src="index-back.js"></script>
 </body>
 </html>
