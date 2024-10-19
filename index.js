@@ -65,47 +65,4 @@ async function logOutUser() {
     }
 }
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    displayUserInformation();
-  } else {
-    window.location.href = "login.html";
-  }
-});
-
-async function displayUserInformation(){
-    var username = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('username'));
-    var icon = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('icon'));
-    var level = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('level'));
-    var levelXP = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('levelXP'));
-    var levelXPMax = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('levelXPMax'));
-    var currency = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('currency'));
-
-    var levelDisplayText = "Level: " + level + " (" + levelXP + "/" + levelXPMax + ")";
-
-    document.getElementById('username').innerText = username;
-    document.getElementById("userImage").src = icon;
-    document.getElementById('levelDisplay').innerText = levelDisplayText;
-    document.getElementById('currencyDisplay').innerText = currency;
-
-    displayTaskPopup();
-    displayTasks();
-    displaySkills();
-    displayGoodHabits();
-    displayBadHabits();
-    displayLatestAchievement();
-    displayActiveQuests();
-    displayLatestGuildPosts();
-}
-
-async function displayTasks(){
-    var tasks = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('tasks'));
-    for(var i = 0; i < tasks.length; i++){
-        var task = "task" + i.toString();
-        try{
-            document.getElementById(task).remove();
-        }catch{
-            
-        }
-    }
-}
+//var username = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('username'));
