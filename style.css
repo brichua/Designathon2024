@@ -120,3 +120,68 @@ body {
     background-color: white;
 }
 
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.rounded-input {
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-color: #6B705C;
+    border-style: solid;
+    width: 78%;
+}
+
+.rounded-input:focus {
+    border-color: #6B705C;
+    background-color: B7B7A4;
+}
+
+.login-btn {
+    background-color: #B7B7A4;
+    border-color: #6B705C;
+    color: #6B705C;
+    border-radius: 10px;
+    height: 2.5rem;
+    border-style: solid;
+}
+
+.login-btn:hover {
+    background-color: #A5A58D;
+}
+
+.social-btn {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 5px;
+}
+
+.social-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.material-symbols-outlined {
+    color: black;
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+.link-click {
+    color: #B7B7A4;
+}
+
+.link-click:hover {
+    text-decoration: none;
+    color: #6B705C;
+}
+
+.input-header{
+    color: #6B705C;
+}

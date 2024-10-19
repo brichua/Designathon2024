@@ -3,12 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sono:wght@200..800&display=swap" rel="stylesheet">
   <title>Interactive Night Sky</title>
   <!-- <style>
     body { margin: 0; }
     canvas { display: block; }
   </style> -->
   <link rel="stylesheet" href="style.css">
+  <style>
+    img{
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .moon{
+        margin-top: -17%;
+        margin-left: 15%;
+    }
+  </style>
 </head>
 <body>
   <div class="sky">
@@ -17,6 +31,7 @@
     <div class="moving-stars"></div>
     <div class="moon" id="moon"></div>
     <div class="phrase"></div>
+    <img src="ground.png">
   </div>
 
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
