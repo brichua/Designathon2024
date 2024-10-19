@@ -1,4 +1,3 @@
-import * as THREE from "three"
 const firebaseConfig = {
       apiKey: "AIzaSyCILXAo6Rf9HG-iREaqQ9p3fxf_idHt3X0",
       authDomain: "designathon-2024.firebaseapp.com",
@@ -10,8 +9,6 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-
-console.log(THREE);
 
 async function login() {
     const email = document.getElementById("login-email").value;
