@@ -1,3 +1,4 @@
+import * as THREE from "three"
 const firebaseConfig = {
       apiKey: "AIzaSyCILXAo6Rf9HG-iREaqQ9p3fxf_idHt3X0",
       authDomain: "designathon-2024.firebaseapp.com",
@@ -10,17 +11,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-var taskName;
-var taskDifficulty = 0;
-var taskType;
-var taskSkill;
-var taskCurrencyReward;
-var xpReward;
-var skillxpReward;
-var taskCompletion;
-var taskCompleteNumber = -1;
-
-var taskDisplayType = "all";
+console.log(THREE);
 
 async function login() {
     const email = document.getElementById("login-email").value;
