@@ -32,7 +32,7 @@ async function login() {
     try {
         await firebase.auth().setPersistence(persistence);
         await firebase.auth().signInWithEmailAndPassword(email, password);
-        window.location.href = "main.html";
+        window.location.href = "index.html";
     } catch (error) {
         console.error("Error logging in:", error);
         alert(error);
@@ -48,7 +48,7 @@ async function signup() {
         await db.collection("Users").doc(firebase.auth().currentUser.uid).set({
             email: email,
         });
-        window.location.href = "create-user.html";
+        window.location.href = "index.html";
     } catch (error) {
         console.error("Error signing up:", error);
         alert(error)
