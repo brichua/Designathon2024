@@ -52,5 +52,3 @@ async function logOutUser() {
         console.error('Error signing out:', error);
     }
 }
-
-//var username = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('username'));
