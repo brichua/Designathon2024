@@ -50,6 +50,14 @@
     }
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
+    span.icon{
+            background-color: #B7B7A4;
+            border-color: #6B705C;
+            color: #6B705C;
+            border: solid 2px;
+            width:100%;
+        }
+
     .material-symbols-outlined {
             color: white;
             position: relative;
@@ -69,7 +77,7 @@
 <body>
   <div class="sky">
     <div class="close-btn">
-        <a href="index.html" class="material-symbols-outlined">close</a>
+        <span class="material-symbols-outlined">close</span>
     </div>
     <div class="stars"></div>
     <div class="comet"></div>
@@ -79,7 +87,11 @@
     <img id="ground-image" class="ground-image" src="ground.png">
     <img id="new-image" class="new-image" src="writing.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
-  </div>
+    <input class="message " contenteditable="true">
+        Write here...
+</input>
+    <img id="jar" class="jar" src="jar.png">
+    </div>
 
   <script src="index-back.js"></script>
   <script>

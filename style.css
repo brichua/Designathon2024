@@ -221,3 +221,11 @@ img{
     width: 1525px;
     font-size: 20px;
 }
+
+.jar{
+    position: relative;
+    margin-top: 270px;
+    margin-left: 1100px;
+    width: 950px;
+    height: auto;
+}

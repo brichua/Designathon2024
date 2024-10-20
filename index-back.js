@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         moon.classList.add(phases[currentPhase]);
     })
 
+
     //Generate countless stars
     const starsContainer = document.querySelector(".stars");
     const numStars = 1000; //Adjust this number for more or fewer stars
