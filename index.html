@@ -52,6 +52,52 @@
       background-color: rgba(255, 255, 255, 0); /* Transparent area */
       z-index: 10;
     }
+
+    .cards-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 500px;
+      height: 300px;
+      background-color: #e09ea2;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      padding: 10px;
+      text-align: center;
+      z-index: 15;
+    }
+
+    /* Keyframe for cards sliding up from bottom to top */
+    @keyframes slideUpAndOut {
+      0% {
+        transform: translateY(140vh); /* Start from below the screen */
+      }
+      100% {
+        transform: translateY(-120vh); /* End above the screen */
+      }
+    }
+
+    .card.slide-up {
+      animation: slideUpAndOut 10s linear forwards;
+    }
+
+    .card.hidden {
+      transform: translateY(100vh); /* Start from off-screen (below) */
+    }
+
     .slide-down {
       transform: translateY(100%);
     }
@@ -83,7 +129,11 @@
     <button id="messageButton" onclick="sendMessage()" class="message-btn btn-block">Fold and Send Star</button>
     <img id="jar" class="jar" src="jar.png">
     <div id="wishStar">
-
+    <div class="cards-container" id="cards-container">
+      <div class="card hidden" id="card1"></div>
+      <div class="card hidden" id="card2"></div>
+      <div class="card hidden" id="card3"></div>
+    </div>
     </div>
     <audio id="background-music" loop autoplay></audio>
     </div>
@@ -109,6 +159,9 @@
     const x = document.getElementById('x');
     const message = document.getElementById('message');
     const messageButton = document.getElementById('messageButton');
+    const cardsContainer = document.getElementById('cards-container');
+    const cards = document.querySelectorAll('.card');
+    let cardsVisible = false;
     let imageVisible = true; // Track which image is visible
     let jarOpen = false;
     hoverArea.addEventListener('click', () => {
@@ -138,13 +191,28 @@
       if (!jarOpen){
         jar.src = 'openJarOutline.png'; // Change this to your new image
         jarOpen = true;
+        if (!cardsVisible) {
+        cardsContainer.style.display = 'flex'; // Show the cards container
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.remove('hidden');
+            card.classList.add('slide-up'); // Slide up each card
+          }, index * 200); // Stagger the animation for each card
+        });
+      } 
       }
       else{
         jar.src = 'JarOutline.png'; // Change this to your new image
         jarOpen = false;
+        cards.forEach((card, index) => {
+            card.classList.add('hidden');
+            card.classList.remove('slide-up'); // Slide down each card
+        });
       }
-      
-      
+      setTimeout(() => {
+          cardsContainer.style.display = 'none'; // Hide the container after the animation
+        }, 11000); // Delay hiding until the last card slides down
+        cardsVisible = !cardsVisible;
      
     });
 
@@ -221,6 +289,30 @@ function rotatePrompts() {
 
   currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
 }
+
+function createCards(data) {
+      // Clear any existing cards
+      cardsContainer.innerHTML = '';
+      
+      data.forEach((doc, index) => {
+        const cardData = doc.data();
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.textContent = cardData.text; // Use your field name from Firestore
+
+        cardsContainer.appendChild(card);
+
+        // Add staggered slide-up animation
+        setTimeout(() => {
+          card.classList.add('slide-up');
+        }, index * 200);
+      });
+
+      // Hide the cards once they slide out of view
+      setTimeout(() => {
+        cardsContainer.style.display = 'none';
+      }, 15000); // Slightly longer than the animation duration (5s)
+    }
 
 setInterval(rotatePrompts, 120000);
 rotatePrompts();
