@@ -24,3 +24,17 @@ async function loadWishes(){
         document.getElementById('wishStar').appendChild(img);
     }
 }
+
+function returnBtnFunction(){
+    let e = document.getElementById('newWishMessage');
+    returnBtn.classList.remove('slide-up');
+    keepBtn.classList.remove('slide-up');
+    e.innerHTML = '<span class="risingStar material-symbols-outlined";>kid_star</span>';
+    setTimeout(function(){
+        sky.removeChild(e);
+    },4000)
+}
+
+function keepBtnFunction(){
+
+}

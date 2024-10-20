@@ -321,17 +321,39 @@ transform: translateY(1200px);
 .fallingStar{
     position: absolute;
     top: -20px;
-    left: 600px;
+    left: 900px;
     color: #ffffff;
-    animation: fall 5s linear forwards;
-    width: 150px;
-    height: 150px;
+    animation: fall 4s linear forwards;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    font-size-adjust: 5;
     font-variation-settings:
     'FILL' 255,
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
     text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+
+}
+
+.risingStar{
+    position: absolute;
+    top: -20px;
+    left: 900px;
+    color: #ffffff;
+    animation: rise 4s linear forwards;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    font-size-adjust: 5;
+    font-variation-settings:
+    'FILL' 255,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+
 }
 
 @keyframes fall {
@@ -339,11 +361,50 @@ transform: translateY(1200px);
         transform: translateY(0) rotate(0deg);
         opacity: 1;
     }
-    80% {
+    100% {
+        transform: translateY(60vh) rotate(360deg);
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(60vh) rotate(0deg);
         opacity: 1;
     }
     100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
+        transform: translateY(-50vh) rotate(360deg);
     }
+}
+
+.buttonRow{
+    display: flex;
+    align-items: center;
+}
+
+.returnBtn{
+    position: absolute; /* Changed to absolute for correct positioning */
+    background-color: #6968a2;
+    color: white;
+    margin-top: 1700px;
+    margin-left: 700px;
+    border-radius: 25px;
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+    transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
+}
+
+.keepBtn{
+    position: absolute; /* Changed to absolute for correct positioning */
+    background-color: #6968a2;
+    color: white;
+    margin-top: 1700px;
+    margin-left: 1175px;
+    border-radius: 25px;
+    height: 50px;
+    width: 200px;
+    font-size: 20px;
+    transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
 }

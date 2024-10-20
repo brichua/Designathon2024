@@ -130,6 +130,11 @@
     <input id="message" class="message" placeholder="Write a message"></input>
     <button id="messageButton" onclick="sendMessage()" class="message-btn btn-block">Fold and Send Star</button>
     <img id="jar" class="jar" src="jar.png">
+    <div class="buttonRow">
+        <button id="returnBtn" onclick="returnBtnFunction()" class="returnBtn btn-block">Return To Stars</button>
+        <br>
+        <button id="keepBtn" onclick="keepBtnFunction()" class="keepBtn btn-block">Fold and Keep</button>
+    </div>
     <div id="wishStar">
     <div class="cards-container" id="cards-container">
       <div class="card hidden" id="card1"></div>
@@ -162,6 +167,8 @@
     const message = document.getElementById('message');
     const messageButton = document.getElementById('messageButton');
     const cardsContainer = document.getElementById('cards-container');
+    const returnBtn = document.getElementById('returnBtn');
+    const keepBtn = document.getElementById('keepBtn');
     const cards = document.querySelectorAll('.card');
     let cardsVisible = false;
     let imageVisible = true; // Track which image is visible
@@ -364,10 +371,13 @@ async function receiveWish(i){
     let sky = document.getElementById('sky');
     let wishStars = document.getElementById('wishStar');
     let e = document.createElement('span');
-    e.style.fontSize = '150px';
-    e.innerHTML = '<span class="fallingStar material-symbols-outlined">kid_star</span>';
+    e.id = "newWishMessage"
+    e.addEventListener('click', () => openWish());
+    e.innerHTML = '<span class="fallingStar material-symbols-outlined";>kid_star</span>';
 
     sky.appendChild(e);
+    message.classList.remove('slide-up');
+    messageButton.classList.remove('slide-up');
     
     let id = "star" + i;
     let doc = document.getElementById(id);
@@ -390,6 +400,11 @@ async function receiveWish(i){
 }
 
 setInterval(checkCondition, 5000);
+
+function openWish(){
+        returnBtn.classList.add('slide-up');
+        keepBtn.classList.add('slide-up');
+}
   </script>
 </body>
 </html>
