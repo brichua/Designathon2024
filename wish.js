@@ -14,14 +14,14 @@
 //   user: "Person who sent wish"
 // });
 
-import { doc, setDoc } from "firebase/firestore"; 
+// import { doc, setDoc } from "firebase/firestore"; 
 
-// Add a new document in collection "cities"
-await setDoc(doc(db, "cities", "LA"), {
-  name: "Los Angeles",
-  state: "CA",
-  country: "USA"
-});
+// // Add a new document in collection "cities"
+// await setDoc(doc(db, "cities", "LA"), {
+//   name: "Los Angeles",
+//   state: "CA",
+//   country: "USA"
+// });
 
 // Get the element you want to listen for the Enter key on
 const inputElement = document.getElementById("userInput");

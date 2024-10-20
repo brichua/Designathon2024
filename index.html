@@ -49,27 +49,6 @@
       transform: translateY(0);
     }
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-    span.icon{
-            background-color: #B7B7A4;
-            border-color: #6B705C;
-            color: #6B705C;
-            border: solid 2px;
-            width:100%;
-        }
-
-    .material-symbols-outlined {
-            color: white;
-            position: relative;
-            margin-top: 5px;
-            margin-left: 5px;
-            z-index: 2;
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
-        }
     
   </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -87,7 +66,7 @@
     <img id="ground-image" class="ground-image" src="ground.png">
     <img id="new-image" class="new-image" src="writing.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
-    <input id="userInput" class="message" placeholder="Write a star"></input>
+    <input id="message" class="message" placeholder="Write a star"></input>
     <img id="jar" class="jar" src="jar.png">
     </div>
 
@@ -107,12 +86,16 @@
         hoverArea.classList.add('slide-down');
         newImage.classList.add('slide-up');
         jar.classList.add('slide-up');
+        message.classList.add('slide-up');
+        x.classList.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
         groundImage.classList.remove('slide-down');
         hoverArea.classList.remove('slide-down');
         newImage.classList.remove('slide-up');
         jar.classList.remove('slide-up');
+        message.classList.remove('slide-up');
+        x.classList.remove('slide-up');
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;
@@ -125,12 +108,16 @@
         hoverArea.classList.add('slide-down');
         newImage.classList.add('slide-up');
         jar.classList.add('slide-up');
+        message.classList.add('slide-up');
+        x.classList.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
         groundImage.classList.remove('slide-down');
         hoverArea.classList.remove('slide-down');
         newImage.classList.remove('slide-up');
         jar.classList.remove('slide-up');
+        message.classList.remove('slide-up');
+        x.classList.remove('slide-up');
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;

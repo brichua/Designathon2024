@@ -213,19 +213,47 @@ img{
     margin-left: 15%;
 }
 
-.message{
-    position: relative;
-    margin-top: 885px;
+.message {
+    position: absolute; /* Changed to absolute for correct positioning */
+    margin-top: 880px;
     margin-left: 250px;
     height: 100px;
     width: 1525px;
     font-size: 20px;
+    transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
 }
 
 .jar{
-    position: relative;
+    position: absolute;
     margin-top: 270px;
     margin-left: 1100px;
     width: 950px;
     height: auto;
+    transform: translateY(1000px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
+}
+
+span.icon{
+    background-color: #B7B7A4;
+    border-color: #6B705C;
+    color: #6B705C;
+    border: solid 2px;
+    width:100%;
+}
+
+.material-symbols-outlined {
+    color: white;
+    position: relative;
+    margin-top: 5px;
+    margin-left: 5px;
+    z-index: 2;
+    transition: transform 0.8s ease-in-out;
+bottom: 0;
+transform: translateY(1200px);
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
