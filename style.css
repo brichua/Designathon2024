@@ -212,3 +212,12 @@ img{
     margin-top: -17%;
     margin-left: 15%;
 }
+
+.message{
+    position: relative;
+    margin-top: 885px;
+    margin-left: 250px;
+    height: 100px;
+    width: 1525px;
+    font-size: 20px;
+}
