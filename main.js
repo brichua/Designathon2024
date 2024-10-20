@@ -71,8 +71,8 @@ async function sendMessage() {
         });
     var wishesTemp = await db.collection("Wishes").doc("allWishes").get().then(doc => doc.get('wish'));
     wishesTemp.push(wishesJar);
-        await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
-            wishesJar: wishesTemp,
+        await db.collection("Wishes").doc("allWishes").update({
+            wish: wishesTemp,
     });
     }catch(error){
         console.error("Error creating task:", error);
