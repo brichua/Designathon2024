@@ -190,7 +190,7 @@ body {
     position: absolute; /* Changed to absolute for correct positioning */
     background-color: #6968a2;
     color: white;
-    margin-top: 1000px;
+    margin-top: 900px;
     margin-left: 725px;
     border-radius: 25px;
     height: 50px;
@@ -229,7 +229,7 @@ img{
 
 .message {
     position: absolute; /* Changed to absolute for correct positioning */
-    margin-top: 880px;
+    margin-top: 780px;
     margin-left: 250px;
     height: 100px;
     width: 1525px;
@@ -240,20 +240,12 @@ img{
 
 .jar{
     position: absolute;
-    margin-top: 270px;
+    margin-top: 220px;
     margin-left: 1100px;
     width: 950px;
     height: auto;
     transform: translateY(1000px); /* Start off-screen */
     transition: transform 0.8s ease-in-out;
-}
-
-span.icon{
-    background-color: #B7B7A4;
-    border-color: #6B705C;
-    color: #6B705C;
-    border: solid 2px;
-    width:100%;
 }
 
 .material-symbols-outlined {
@@ -278,6 +270,43 @@ transform: translateY(1200px);
     position: relative;
     animation: twinkle 3s infinite;
 }
+
+.fade {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .visible {
+    opacity: 1;
+  }
+  
+  #prompt {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    width: 75%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border: #1c1b52;
+    border-radius: 5px;
+    font-size: 25px;
+  }
+  
+  #ping {
+    position: relative;
+    top: 0px;
+    left: 50%;
+    width: 75%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border: #1c1b52;
+    border-radius: 5px;
+    font-size: 25px;
+  }
 
 
 @keyframes twinkle {

@@ -69,7 +69,7 @@ async function sendMessage() {
         await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
         wishes: wishTemp,
         });
-    var wishesTemp = await db.collection("Wishes").doc("allWishes").get().then(doc => doc.get('wishes'));
+    var wishesTemp = await db.collection("Wishes").doc("allWishes").get().then(doc => doc.get('wish'));
     wishesTemp.push(wishesJar);
         await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
             wishesJar: wishesTemp,
