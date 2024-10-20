@@ -186,6 +186,20 @@ body {
     height: 50px;
 }
 
+.message-btn {
+    position: absolute; /* Changed to absolute for correct positioning */
+    background-color: #6968a2;
+    color: white;
+    margin-top: 1000px;
+    margin-left: 725px;
+    border-radius: 25px;
+    height: 50px;
+    width: 500px;
+    font-size: 20px;
+    transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
+}
+
 .login-btn:hover {
     background-color: #1c1b52;
 }

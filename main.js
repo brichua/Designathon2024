@@ -52,3 +52,22 @@ async function logOutUser() {
         console.error('Error signing out:', error);
     }
 }
+
+
+async function sendMessage() {
+    const message = document.getElementById('message');
+    const messageButton = document.getElementById('messageButton');
+    var wish = document.getElementById("message").value;
+    message.classList.remove('slide-up');
+    messageButton.classList.remove('slide-up');
+    const wishes = {content: wish, received: false}
+    try{
+    var wishTemp = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('wishes'));
+    wishTemp.push(wishes);
+        await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
+        wishes: wishTemp,
+        });
+    }catch(error){
+        console.error("Error creating task:", error);
+    }
+}
