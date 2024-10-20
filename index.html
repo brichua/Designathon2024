@@ -68,6 +68,8 @@
     <div class="close-btn">
         <span id="x" class="material-symbols-outlined">close</span>
     </div>
+    <div id="prompt" class="fade"></div>
+    <div id="ping" class="fade"></div>
     <div class="stars"></div>
     <div class="comet"></div>
     <div class="moving-stars"></div>
@@ -83,9 +85,20 @@
     <div id="wishStar">
 
     </div>
+    <audio id="background-music" loop autoplay></audio>
     </div>
 
   <script src="index-back.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="main.js"></script>
+<script src="wish.js"></script>
+<script src="music.js"></script>
   <script>
     // JavaScript to change the image on hover
     const groundImage = document.getElementById('ground-image');
@@ -185,15 +198,66 @@
         jar.src = 'openJar.png'; // Change this to your new image
       }
     });
-  </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="main.js"></script>
-<script src="wish.js"></script>
+    const prompts = [
+  "Remember to take deep breaths.",
+  "Look at the sky and smile.",
+  "What's made you happy today?",
+  "Take a break, you've earned it.",
+  "Think happy, positive thoughts."
+];
+
+let currentPromptIndex = 0;
+const promptElement = document.getElementById('prompt');
+const pingElement = document.getElementById('ping');
+
+function rotatePrompts() {
+  promptElement.textContent = prompts[currentPromptIndex];
+  promptElement.classList.add('visible');
+
+  setTimeout(() => {
+    promptElement.classList.remove('visible');
+  }, 10000);
+
+  currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
+}
+
+setInterval(rotatePrompts, 120000);
+rotatePrompts();
+
+function showPing() {
+  pingElement.classList.add('visible');
+
+  setTimeout(() => {
+    pingElement.classList.remove('visible');
+  }, 3000);
+}
+
+async function checkCondition() {
+    let conditionMet = false;
+    const userId = firebase.auth().currentUser.uid;
+
+    const userDoc = await db.collection("Users").doc(userId).get();
+    const wishes = userDoc.get('wishes');
+
+    for (let i = 0; i < wishes.length; i++) {
+        if (wishes[i].received === true) {
+            conditionMet = true;
+            wishes[i].received = false;
+
+            await db.collection("Users").doc(userId).update({
+                wishes: wishes
+            });
+        }
+    }
+
+    if (conditionMet) {
+        showPing();
+        conditoinMet = false;
+    }
+}
+
+setInterval(checkCondition, 5000);
+  </script>
 </body>
 </html>
