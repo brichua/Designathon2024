@@ -6,6 +6,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sono:wght@200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Interactive Night Sky</title>
   <link rel="stylesheet" href="style.css">
   <style>
@@ -62,9 +63,10 @@
     
   </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-  <div class="sky">
+  <div id="sky" class="sky">
     <div class="close-btn">
         <span id="x" class="material-symbols-outlined">close</span>
     </div>
@@ -79,7 +81,7 @@
     <img id="new-image" class="new-image" src="table.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
     <div class="jar-hover-area" id="jar-hover-area"></div> <!-- Hover area -->
-    <input id="message" class="message" placeholder="Write a star"></input>
+    <input id="message" class="message" placeholder="Write a message"></input>
     <button id="messageButton" onclick="sendMessage()" class="message-btn btn-block">Fold and Send Star</button>
     <img id="jar" class="jar" src="jar.png">
     <div id="wishStar">
@@ -255,6 +257,44 @@ async function checkCondition() {
         showPing();
         conditoinMet = false;
     }
+}
+
+async function receiveWish(i){
+    var stars = await db.collection("Wishes").doc('allWishes').get().then(doc => doc.get('wish'));
+    const randomIndex = Math.floor(Math.random() * stars.length);
+    console.log(randomIndex );
+    console.log(stars[randomIndex].content);
+    /*if(!imageVisible){
+        const message = document.getElementById('wishMessage');
+        message.classList.add('slide-up');
+    }*/
+
+    let sky = document.getElementById('sky');
+    let wishStars = document.getElementById('wishStar');
+    let e = document.createElement('span');
+    e.style.fontSize = '150px';
+    e.innerHTML = '<span class="fallingStar material-symbols-outlined">kid_star</span>';
+
+    sky.appendChild(e);
+    
+    let id = "star" + i;
+    let doc = document.getElementById(id);
+    wishStars.removeChild(doc);
+
+    const img = document.createElement('img');
+        img.src = 'brightStar.png';
+        img.classList.add('starBright');
+
+        const { x, y } = getRandomPosition(1500, 400, 50, 50);
+        img.style.left = `${x}px`;
+        img.style.top = `${y}px`;
+        img.id = "star" + i;
+
+        (function(index) {
+            img.addEventListener('click', () => receiveWish(index));
+        })(i);
+
+        document.getElementById('wishStar').appendChild(img);
 }
 
 setInterval(checkCondition, 5000);

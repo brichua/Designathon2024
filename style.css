@@ -317,3 +317,33 @@ transform: translateY(1200px);
         opacity: 1; /* At the middle of the animation, the image is fully visible */
     }
 }
+
+.fallingStar{
+    position: absolute;
+    top: -20px;
+    left: 600px;
+    color: #ffffff;
+    animation: fall 5s linear forwards;
+    width: 150px;
+    height: 150px;
+    font-variation-settings:
+    'FILL' 255,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
