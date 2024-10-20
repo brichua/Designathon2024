@@ -44,8 +44,8 @@
     }
     .jar-hover-area {
       position: absolute;
-      top: 67%;
-      left: 92%;
+      top: 56%;
+      left: 77%;
       width: 210px;
       height: 260px;
       transform: translate(-50%, -50%);
@@ -149,7 +149,7 @@
     });
 
     x.addEventListener('click', () => {
-      if (imageVisible) {
+      if (imageVisible && !jarOpen) {
         // Slide down the ground image and slide up the new image
         groundImage.classList.add('slide-down');
         hoverArea.classList.add('slide-down');
@@ -158,7 +158,7 @@
         message.classList.add('slide-up');
         x.classList.add('slide-up');
         messageButton.classList.add('slide-up');
-      } else {
+      } else if(!jarOpen) {
         // Reset the animation, bringing the ground image back
         groundImage.classList.remove('slide-down');
         hoverArea.classList.remove('slide-down');
