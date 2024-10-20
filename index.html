@@ -98,7 +98,6 @@
     const newImage = document.getElementById('new-image');
     const hoverArea = document.getElementById('hover-area');
     const x = document.getElementById('x');
-    const jar = document.getElementById('jar');
     const message = document.getElementById('message');
     let imageVisible = true; // Track which image is visible
     hoverArea.addEventListener('click', () => {
@@ -108,16 +107,12 @@
         hoverArea.classList.add('slide-down');
         newImage.classList.add('slide-up');
         jar.classList.add('slide-up');
-        x.classList.add('slide-up');
-        message.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
-        groundImage.classList.add('slide-down');
-        hoverArea.classList.add('slide-down');
-        newImage.classList.add('slide-up');
-        jar.classList.add('slide-up');
-        x.classList.add('slide-up');
-        message.add('slide-up');
+        groundImage.classList.remove('slide-down');
+        hoverArea.classList.remove('slide-down');
+        newImage.classList.remove('slide-up');
+        jar.classList.remove('slide-up');
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;
@@ -130,20 +125,18 @@
         hoverArea.classList.add('slide-down');
         newImage.classList.add('slide-up');
         jar.classList.add('slide-up');
-        x.classList.add('slide-up');
-        message.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
-        groundImage.classList.add('slide-down');
-        hoverArea.classList.add('slide-down');
-        newImage.classList.add('slide-up');
-        jar.classList.add('slide-up');
-        x.classList.add('slide-up');
-        message.add('slide-up');
+        groundImage.classList.remove('slide-down');
+        hoverArea.classList.remove('slide-down');
+        newImage.classList.remove('slide-up');
+        jar.classList.remove('slide-up');
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;
     });
+
+    
 
     hoverArea.addEventListener('mouseover', () => {
       groundImage.src = 'groundOutline.png'; // Change this to your new image
