@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('audioVolume', audio.volume);
     };
 
-    // Add an interaction to start playback
     document.addEventListener('click', function() {
         audio.play().catch(error => {
             console.error("Playback failed: ", error);
