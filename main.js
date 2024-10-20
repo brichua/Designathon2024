@@ -55,18 +55,25 @@ async function logOutUser() {
 
 
 async function sendMessage() {
+    var userEmail = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('email'));
     const message = document.getElementById('message');
     const messageButton = document.getElementById('messageButton');
     var wish = document.getElementById("message").value;
     message.classList.remove('slide-up');
     messageButton.classList.remove('slide-up');
     const wishes = {content: wish, received: false}
+    const wishesJar = {content: wish, received: false, email: userEmail}
     try{
     var wishTemp = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('wishes'));
     wishTemp.push(wishes);
         await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
         wishes: wishTemp,
         });
+    var wishesTemp = await db.collection("Wishes").doc("allWishes").get().then(doc => doc.get('wishes'));
+    wishesTemp.push(wishesJar);
+        await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
+            wishesJar: wishesTemp,
+    });
     }catch(error){
         console.error("Error creating task:", error);
     }
