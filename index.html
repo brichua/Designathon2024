@@ -77,7 +77,7 @@
 <body>
   <div class="sky">
     <div class="close-btn">
-        <span class="material-symbols-outlined">close</span>
+        <span id="x" class="material-symbols-outlined">close</span>
     </div>
     <div class="stars"></div>
     <div class="comet"></div>
@@ -87,9 +87,7 @@
     <img id="ground-image" class="ground-image" src="ground.png">
     <img id="new-image" class="new-image" src="writing.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
-    <input class="message " contenteditable="true">
-        Write here...
-</input>
+    <input id="message" class="message" placeholder="Write a star"></input>
     <img id="jar" class="jar" src="jar.png">
     </div>
 
@@ -99,16 +97,49 @@
     const groundImage = document.getElementById('ground-image');
     const newImage = document.getElementById('new-image');
     const hoverArea = document.getElementById('hover-area');
+    const x = document.getElementById('x');
+    const jar = document.getElementById('jar');
+    const message = document.getElementById('message');
     let imageVisible = true; // Track which image is visible
     hoverArea.addEventListener('click', () => {
       if (imageVisible) {
         // Slide down the ground image and slide up the new image
         groundImage.classList.add('slide-down');
+        hoverArea.classList.add('slide-down');
         newImage.classList.add('slide-up');
+        jar.classList.add('slide-up');
+        x.classList.add('slide-up');
+        message.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
-        groundImage.classList.remove('slide-down');
-        newImage.classList.remove('slide-up');
+        groundImage.classList.add('slide-down');
+        hoverArea.classList.add('slide-down');
+        newImage.classList.add('slide-up');
+        jar.classList.add('slide-up');
+        x.classList.add('slide-up');
+        message.add('slide-up');
+      }
+      // Toggle the imageVisible state
+      imageVisible = !imageVisible;
+    });
+
+    x.addEventListener('click', () => {
+      if (imageVisible) {
+        // Slide down the ground image and slide up the new image
+        groundImage.classList.add('slide-down');
+        hoverArea.classList.add('slide-down');
+        newImage.classList.add('slide-up');
+        jar.classList.add('slide-up');
+        x.classList.add('slide-up');
+        message.add('slide-up');
+      } else {
+        // Reset the animation, bringing the ground image back
+        groundImage.classList.add('slide-down');
+        hoverArea.classList.add('slide-down');
+        newImage.classList.add('slide-up');
+        jar.classList.add('slide-up');
+        x.classList.add('slide-up');
+        message.add('slide-up');
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;
