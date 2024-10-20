@@ -306,7 +306,25 @@ usersSnapshot.forEach(async (userDoc) => {
 
 }
 
-function sendMessage(){
+async function sendMessage(){
+    var userEmail = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('email'));
+    var wish = document.getElementById("message").value;
+    const wishes = {content: wish, received: false}
+    const wishesJar = {content: wish, email: userEmail}
+    try{
+    var wishTemp = await db.collection("Users").doc(firebase.auth().currentUser.uid).get().then(doc => doc.get('wishes'));
+    wishTemp.push(wishes);
+        await db.collection("Users").doc(firebase.auth().currentUser.uid).update({
+        wishes: wishTemp,
+        });
+    var wishesTemp = await db.collection("Wishes").doc("allWishes").get().then(doc => doc.get('wish'));
+    wishesTemp.push(wishesJar);
+        await db.collection("Wishes").doc("allWishes").update({
+            wish: wishesTemp,
+    });
+    }catch(error){
+        console.error("Error creating task:", error);
+    }
 
     const message = document.getElementById('message');
     message.value = '';
@@ -376,5 +394,4 @@ function sendMessage(){
       newImage.src = 'table.png';
     }, 3000);
     }, 4000);
-    
 }

@@ -66,9 +66,9 @@
     }
 
     .card {
-      width: 500px;
-      height: 300px;
-      background-color: #e09ea2;
+      width: 600px;
+      height: 100px;
+      background-color: #c2bfd0;
       margin: 10px;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -142,9 +142,9 @@
     </div>
     <div id="wishStar">
     <div class="cards-container" id="cards-container">
-      <div class="card hidden" id="card1"></div>
-      <div class="card hidden" id="card2"></div>
-      <div class="card hidden" id="card3"></div>
+      <div class="card hidden" id="card1">You're doing great! Keep it up!</div>
+      <div class="card hidden" id="card2">Today was a great day. I hope it was the same for you.</div>
+      <div class="card hidden" id="card3">The night is young, maybe we can try to be productive.</div>
     </div>
     </div>
     <audio id="background-music" loop autoplay></audio>
@@ -228,7 +228,7 @@
       }
       setTimeout(() => {
           cardsContainer.style.display = 'none'; // Hide the container after the animation
-        }, 11000); // Delay hiding until the last card slides down
+        }, 20000); // Delay hiding until the last card slides down
         cardsVisible = !cardsVisible;
      
     });
@@ -306,29 +306,40 @@ function rotatePrompts() {
   currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
 }
 
-function createCards(data) {
-      // Clear any existing cards
-      cardsContainer.innerHTML = '';
-      
-      data.forEach((doc, index) => {
-        const cardData = doc.data();
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.textContent = cardData.text; // Use your field name from Firestore
+async function createCards(data) {
+  // Clear any existing cards
+  const wishJar = await db.collection("Users")
+                            .doc(firebase.auth().currentUser.uid)
+                            .get()
+                            .then(doc => doc.get('wishJar')) || []; // Ensure wishJar is an array
+  cardsContainer.innerHTML = '';
 
-        cardsContainer.appendChild(card);
+  data.forEach((doc, index) => {
+    const cardData = doc.data();
+    const card = document.createElement('div');
+    card.classList.add('card');
 
-        // Add staggered slide-up animation
-        setTimeout(() => {
-          card.classList.add('slide-up');
-        }, index * 200);
-      });
-
-      // Hide the cards once they slide out of view
-      setTimeout(() => {
-        cardsContainer.style.display = 'none';
-      }, 15000); // Slightly longer than the animation duration (5s)
+    // Use the index from data to get the corresponding wishJar item
+    // Ensure we do not go out of bounds of wishJar array
+    if (index < wishJar.length) {
+      card.textContent = wishJar[index];
+    } else {
+      card.textContent = 'No message available'; // Default text if there's no corresponding wishJar item
     }
+
+    cardsContainer.appendChild(card);
+
+    // Add staggered slide-up animation
+    setTimeout(() => {
+      card.classList.add('slide-up');
+    }, index * 200);
+  });
+
+  // Hide the cards once they slide out of view
+  setTimeout(() => {
+    cardsContainer.style.display = 'none';
+  }, 15000); // Slightly longer than the animation duration (5s)
+}
 
 setInterval(rotatePrompts, 120000);
 rotatePrompts();
