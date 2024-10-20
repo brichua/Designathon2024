@@ -105,6 +105,9 @@
     .slide-up {
       transform: translateY(0);
     }
+    .moveCenter {
+      transform: translateY(0), translateX(30%);
+    }
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
     
   </style>
@@ -125,9 +128,11 @@
     <div class="phrase"></div>
     <img id="ground-image" class="ground-image" src="ground.png">
     <img id="new-image" class="new-image" src="table.png">
+    <img id="animation" class="animation" src="animation1.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
     <div class="jar-hover-area" id="jar-hover-area"></div> <!-- Hover area -->
-    <input id="message" class="message" placeholder="Write a message"></input>
+    <div id="receivedMessage" class="receivedMessage" visibility="hidden"></div>
+    <input id="message" class="message" placeholder=""></input>
     <button id="messageButton" onclick="sendMessage()" class="message-btn btn-block">Fold and Send Star</button>
     <img id="jar" class="jar" src="jar.png">
     <div class="buttonRow">
@@ -162,6 +167,7 @@
     const newImage = document.getElementById('new-image');
     const hoverArea = document.getElementById('hover-area');
     const jarhoverArea = document.getElementById('jar-hover-area');
+    const animation = document.getElementById('animation');
     const jar = document.getElementById('jar');
     const x = document.getElementById('x');
     const message = document.getElementById('message');
@@ -182,6 +188,7 @@
         jar.classList.add('slide-up');
         message.classList.add('slide-up');
         x.classList.add('slide-up');
+        animation.classList.add('slide-up');
         messageButton.classList.add('slide-up');
       } else {
         // Reset the animation, bringing the ground image back
@@ -191,6 +198,7 @@
         jar.classList.remove('slide-up');
         message.classList.remove('slide-up');
         x.classList.remove('slide-up');
+        animation.classList.remove('slide-up');
         messageButton.classList.remove('slide-up');
       }
       // Toggle the imageVisible state
@@ -286,7 +294,6 @@
 
 let currentPromptIndex = 0;
 const promptElement = document.getElementById('prompt');
-const pingElement = document.getElementById('ping');
 
 function rotatePrompts() {
   promptElement.textContent = prompts[currentPromptIndex];
@@ -327,12 +334,18 @@ setInterval(rotatePrompts, 120000);
 rotatePrompts();
 
 function showPing() {
-  pingElement.classList.add('visible');
-
-  setTimeout(() => {
-    pingElement.classList.remove('visible');
-  }, 3000);
-}
+    console.log("ping");
+    const pingElement = document.getElementById('ping');
+    const newImage = document.getElementById('new-image');
+    pingElement.classList.add('visible');
+    pingElement.innerText = "Someone out there is keeping your message in their hearts";
+    newImage.src = 'tableGlow.png';
+  
+    setTimeout(() => {
+      pingElement.classList.remove('visible');
+      newImage.src = 'table.png';
+    }, 3000);
+  }
 
 function openWish(){
         returnBtn.classList.add('slide-up');

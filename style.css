@@ -229,12 +229,38 @@ img{
 
 .message {
     position: absolute; /* Changed to absolute for correct positioning */
-    margin-top: 780px;
-    margin-left: 250px;
-    height: 100px;
-    width: 1525px;
-    font-size: 20px;
+    margin-top: 740px;
+    margin-left: 380px;
+    height: 130px;
+    width: 1215px;
+    font-size: 25px;
     transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
+    background: transparent;
+    color: #1c1b52;
+    border: 0px;
+}
+
+.message:focus {
+    outline: none; /* Remove the default focus outline */
+    border: 0px; /* Ensure no border on focus */
+}
+
+.animation {
+    position: absolute; /* Changed to absolute for correct positioning */
+    margin-top: 170px;
+    margin-left: -20px;
+    transform: translateY(500px); /* Start off-screen */
+    transition: transform 0.8s ease-in-out;
+}
+
+.jar{
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 1100px;
+    width: 950px;
+    height: auto;
+    transform: translateY(1000px); /* Start off-screen */
     transition: transform 0.8s ease-in-out;
 }
 
@@ -320,8 +346,8 @@ transform: translateY(1200px);
 
 .fallingStar{
     position: absolute;
-    top: -20px;
-    left: 900px;
+    top: 270px;
+    left: 300px;
     color: #ffffff;
     animation: fall 4s linear forwards;
     width: 100px;
@@ -339,7 +365,7 @@ transform: translateY(1200px);
 
 .droppingStar{
     position: absolute;
-    top: -20px;
+    top: 0px;
     left: 1550px;
     color: #ffffff;
     animation: drop 4s linear forwards;
@@ -375,6 +401,36 @@ transform: translateY(1200px);
 
 }
 
+.sendingStar{
+    position: absolute;
+    top: 310px;
+    left: 300px;
+    color: #ffffff;
+    animation: rise 4s linear forwards;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    font-size-adjust: 5;
+    font-variation-settings:
+    'FILL' 255,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+
+}
+
+.receivedMessage{
+    position: absolute; /* Changed to absolute for correct positioning */
+    margin-top: 800px;
+    margin-left: 400px;
+    height: 130px;
+    width: 1215px;
+    font-size: 25px;
+    background: transparent;
+    color: #1c1b52;
+}
+
 @keyframes fall {
     0% {
         transform: translateY(0) rotate(0deg);
@@ -394,7 +450,7 @@ transform: translateY(1200px);
         opacity: 1;
     }
     100% {
-        transform: translateY(60vh) rotate(360deg);
+        transform: translateY(70vh) rotate(360deg);
         opacity: 0;
     }
 }
@@ -419,7 +475,7 @@ transform: translateY(1200px);
     position: absolute; /* Changed to absolute for correct positioning */
     background-color: #6968a2;
     color: white;
-    margin-top: 1700px;
+    margin-top: 1850px;
     margin-left: 700px;
     border-radius: 25px;
     height: 50px;
@@ -433,7 +489,7 @@ transform: translateY(1200px);
     position: absolute; /* Changed to absolute for correct positioning */
     background-color: #6968a2;
     color: white;
-    margin-top: 1700px;
+    margin-top: 1850px;
     margin-left: 1175px;
     border-radius: 25px;
     height: 50px;

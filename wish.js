@@ -1,3 +1,7 @@
+
+
+const receivedMessage = document.getElementById('receivedMessage');
+document.getElementById("receivedMessage").style.visibility = "hidden";
 loadWishes();
 let randomIndex = 0;
 
@@ -51,35 +55,24 @@ async function checkCondition() {
     
 }
 
-function showPing() {
-    console.log("ping");
-    const pingElement = document.getElementById('ping');
-    pingElement.classList.add('visible');
-  
-    setTimeout(() => {
-      pingElement.classList.remove('visible');
-    }, 3000);
-  }
-
 async function receiveWish(i){
     var stars = await db.collection("Wishes").doc('allWishes').get().then(doc => doc.get('wish'));
-    const randomIndex = Math.floor(Math.random() * stars.length);
-    console.log(randomIndex );
-    console.log(stars[randomIndex].content);
-    /*if(!imageVisible){
-        const message = document.getElementById('wishMessage');
-        message.classList.add('slide-up');
-    }*/
-
     let sky = document.getElementById('sky');
     let wishStars = document.getElementById('wishStar');
+    const receivedMessage = document.getElementById('receivedMessage');
+    const randomIndex = Math.floor(Math.random() * stars.length);
+    let animation = document.getElementById('animation');
+    document.getElementById("animation").style.visibility = "hidden";
+    document.getElementById("message").style.visibility = "hidden";
+    animation.classList.add('slide-up');
+    content = stars[randomIndex].content;
+    console.log(content);
     let e = document.createElement('span');
     e.id = "newWishMessage"
     e.addEventListener('click', () => openWish());
     e.innerHTML = '<span class="fallingStar material-symbols-outlined";>kid_star</span>';
 
     sky.appendChild(e);
-    message.classList.remove('slide-up');
     messageButton.classList.remove('slide-up');
     
     let id = "star" + i;
@@ -98,48 +91,203 @@ async function receiveWish(i){
         (function(index) {
             img.addEventListener('click', () => receiveWish(index));
         })(i);
+        receivedMessage.innerText = content;
+        console.log(message);
 
         document.getElementById('wishStar').appendChild(img);
+        animation.src = 'animation10.png'
+        setTimeout(function(){
+        sky.removeChild(e);
+            document.getElementById("animation").style.visibility = "visible";
+            setTimeout(function(){
+                animation.src = 'animation9.png'
+                setTimeout(function(){
+                    animation.src = 'animation8.png'
+                    setTimeout(function(){
+                        animation.src = 'animation7.png'
+                        setTimeout(function(){
+                            animation.src = 'animation6.png'
+                            setTimeout(function(){
+                                animation.src = 'animation5.png'
+                                setTimeout(function(){
+                                    animation.src = 'animation4.png'
+                                    setTimeout(function(){
+                                        animation.src = 'animation3.png'
+                                        setTimeout(function(){
+                                            animation.src = 'animation2.png'
+                                            setTimeout(function(){
+                                                animation.src = 'animation1.png'
+                                                
+    document.getElementById("animation").style.visibility = "visible";
+    document.getElementById("receivedMessage").style.visibility = "visible";
+    returnBtn.classList.add('slide-up');
+    keepBtn.classList.add('slide-up');
+                                            }, 500);
+                                        }, 250);
+                                    }, 250);
+                                }, 250);
+                            }, 250);
+                        }, 250);
+                    }, 250);
+                }, 250);
+            }, 250);
+        }, 4000);
 }
 
 setInterval(checkCondition, 5000);
 
 function returnBtnFunction(){
-    let e = document.getElementById('newWishMessage');
+    const message = document.getElementById('message');
+    message.value = '';
+    const receivedMessage = document.getElementById('receivedMessage');
+    document.getElementById("receivedMessage").style.visibility = "hidden";
     returnBtn.classList.remove('slide-up');
     keepBtn.classList.remove('slide-up');
-    e.innerHTML = '<span class="risingStar material-symbols-outlined";>kid_star</span>';
+    let animation = document.getElementById('animation');
+    const messageButton = document.getElementById('messageButton');
+    document.getElementById("messageButton").style.visibility = "hidden";
+    messageButton.classList.remove('slide-up');
+    document.getElementById('message').value = '';
+    animation.classList.add('slide-up');
     setTimeout(function(){
+        animation.src = 'animation1.png'
+        setTimeout(function(){
+            animation.src = 'animation2.png'
+            setTimeout(function(){
+                animation.src = 'animation3.png'
+                setTimeout(function(){
+                    animation.src = 'animation4.png'
+                    setTimeout(function(){
+                        animation.src = 'animation5.png'
+                        setTimeout(function(){
+                            animation.src = 'animation6.png'
+                            setTimeout(function(){
+                                animation.src = 'animation7.png'
+                                setTimeout(function(){
+                                    animation.src = 'animation8.png'
+                                    setTimeout(function(){
+                                        animation.src = 'animation9.png'
+                                        setTimeout(function(){
+                                            animation.src = 'animation10.png'
+                                            document.getElementById("messageButton").style.visibility = "visible";
+                                        }, 500);
+                                    }, 250);
+                                }, 250);
+                            }, 250);
+                        }, 250);
+                    }, 250);
+                }, 250);
+            }, 250);
+        }, 250);
+    }, 250);
+
+    setTimeout(function() {
+        document.getElementById("animation").style.visibility = "hidden";
+        animation.classList.remove('slide-up');
+    let sky = document.getElementById('sky');
+    let e = document.createElement('span');
+    e.id = "newWishMessage";
+    e.addEventListener('click', () => openWish());
+    e.innerHTML = '<span class="sendingStar material-symbols-outlined">kid_star</span>';
+    sky.appendChild(e);
+    setTimeout(function() {
         sky.removeChild(e);
-    },4000)
+        animation.src = 'animation1.png'
+        document.getElementById("animation").style.visibility = "visible";
+        animation.classList.add('slide-up');
+        messageButton.classList.add('slide-up');
+    }, 3000);
+    }, 4000);
 }
 
 async function keepBtnFunction(){
-    let e = document.getElementById('newWishMessage');
-    let sky = document.getElementById('sky');
+    const message = document.getElementById('message');
+    const receivedMessage = document.getElementById('receivedMessage');
+    document.getElementById("receivedMessage").style.visibility = "hidden";
+    message.value = '';
     returnBtn.classList.remove('slide-up');
     keepBtn.classList.remove('slide-up');
-    e.innerHTML = '<span class="risingStar material-symbols-outlined";>kid_star</span>';
+    let animation = document.getElementById('animation');
+    const messageButton = document.getElementById('messageButton');
+    document.getElementById("messageButton").style.visibility = "hidden";
+    messageButton.classList.remove('slide-up');
+    document.getElementById('message').value = '';
+    animation.classList.add('slide-up');
+    setTimeout(function(){
+        animation.src = 'animation1.png'
+        setTimeout(function(){
+            animation.src = 'animation2.png'
+            setTimeout(function(){
+                animation.src = 'animation3.png'
+                setTimeout(function(){
+                    animation.src = 'animation4.png'
+                    setTimeout(function(){
+                        animation.src = 'animation5.png'
+                        setTimeout(function(){
+                            animation.src = 'animation6.png'
+                            setTimeout(function(){
+                                animation.src = 'animation7.png'
+                                setTimeout(function(){
+                                    animation.src = 'animation8.png'
+                                    setTimeout(function(){
+                                        animation.src = 'animation9.png'
+                                        setTimeout(function(){
+                                            animation.src = 'animation10.png'
+                                            document.getElementById("messageButton").style.visibility = "visible";
+                                        }, 500);
+                                    }, 250);
+                                }, 250);
+                            }, 250);
+                        }, 250);
+                    }, 250);
+                }, 250);
+            }, 250);
+        }, 250);
+    }, 250);
+
+    let sky = document.getElementById('sky');
+    let e = document.createElement('span');
+    setTimeout(function() {
+        document.getElementById("animation").style.visibility = "hidden";
+        animation.classList.remove('slide-up');
+    e.id = "newWishMessage";
+    e.addEventListener('click', () => openWish());
+    e.innerHTML = '<span class="sendingStar material-symbols-outlined">kid_star</span>';
+    sky.appendChild(e);
+    setTimeout(function() {
+        sky.removeChild(e);
+        animation.src = 'animation1.png'
+        document.getElementById("animation").style.visibility = "visible";
+        animation.classList.add('slide-up');
+        messageButton.classList.add('slide-up');
+        setTimeout(function(){
+            e = document.createElement('span');
+            e.id = "newWishMessage"
+            e.addEventListener('click', () => openWish());
+            e.innerHTML = '<span class="droppingStar material-symbols-outlined";>kid_star</span>';
+        
+            sky.appendChild(e);
+        
+            setTimeout(function(){
+                sky.removeChild(e);
+                jar.src = "jar.png";
+                const newImage = document.getElementById('new-image');
+        const jarhoverArea = document.getElementById('jar-hover-area');
+        const x = document.getElementById('x');
+        const message = document.getElementById('message');
+        const messageButton = document.getElementById('messageButton');
+        newImage.classList.add('slide-up');
+        jar.classList.add('slide-up');
+        message.classList.add('slide-up');
+        x.classList.add('slide-up');
+        messageButton.classList.add('slide-up');
+            },3000)
+        },4000)
+    }, 3000);
+    }, 4000);
 
     const jar = document.getElementById("jar");
     jar.src = "openJar.png";
-
-    setTimeout(function(){
-        sky.removeChild(e);
-        e = document.createElement('span');
-        e.id = "newWishMessage"
-        e.addEventListener('click', () => openWish());
-        e.innerHTML = '<span class="droppingStar material-symbols-outlined";>kid_star</span>';
-    
-        sky.appendChild(e);
-        message.classList.remove('slide-up');
-        messageButton.classList.remove('slide-up');
-    
-        setTimeout(function(){
-            sky.removeChild(e);
-            jar.src = "jar.png";
-        },4000)
-    },4000)
 
 const stars = await db.collection("Wishes").doc('allWishes').get().then(doc => doc.get('wish'));
 
@@ -156,5 +304,77 @@ usersSnapshot.forEach(async (userDoc) => {
     }
 });
 
+}
 
+function sendMessage(){
+
+    const message = document.getElementById('message');
+    message.value = '';
+    let animation = document.getElementById('animation');
+    const messageButton = document.getElementById('messageButton');
+    document.getElementById("messageButton").style.visibility = "hidden";
+    messageButton.classList.remove('slide-up');
+    document.getElementById('message').value = '';
+    animation.classList.add('slide-up');
+    setTimeout(function(){
+        animation.src = 'animation1.png'
+        setTimeout(function(){
+            animation.src = 'animation2.png'
+            setTimeout(function(){
+                animation.src = 'animation3.png'
+                setTimeout(function(){
+                    animation.src = 'animation4.png'
+                    setTimeout(function(){
+                        animation.src = 'animation5.png'
+                        setTimeout(function(){
+                            animation.src = 'animation6.png'
+                            setTimeout(function(){
+                                animation.src = 'animation7.png'
+                                setTimeout(function(){
+                                    animation.src = 'animation8.png'
+                                    setTimeout(function(){
+                                        animation.src = 'animation9.png'
+                                        setTimeout(function(){
+                                            animation.src = 'animation10.png'
+                                            document.getElementById("messageButton").style.visibility = "visible";
+                                        }, 500);
+                                    }, 250);
+                                }, 250);
+                            }, 250);
+                        }, 250);
+                    }, 250);
+                }, 250);
+            }, 250);
+        }, 250);
+    }, 250);
+
+    setTimeout(function() {
+        document.getElementById("animation").style.visibility = "hidden";
+        animation.classList.remove('slide-up');
+    let sky = document.getElementById('sky');
+    let e = document.createElement('span');
+    e.id = "newWishMessage";
+    e.addEventListener('click', () => openWish());
+    e.innerHTML = '<span class="sendingStar material-symbols-outlined">kid_star</span>';
+    sky.appendChild(e);
+    setTimeout(function() {
+        sky.removeChild(e);
+        animation.src = 'animation1.png'
+        document.getElementById("animation").style.visibility = "visible";
+        animation.classList.add('slide-up');
+        messageButton.classList.add('slide-up');
+    }, 3000);
+
+    const pingElement = document.getElementById('ping');
+    const newImage = document.getElementById('new-image');
+    pingElement.classList.add('visible');
+    pingElement.innerText = "Your message is being send out to the stars.";
+    newImage.src = 'tableGlow.png';
+  
+    setTimeout(() => {
+      pingElement.classList.remove('visible');
+      newImage.src = 'table.png';
+    }, 3000);
+    }, 4000);
+    
 }
