@@ -35,6 +35,7 @@ async function signup() {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
         await db.collection("Users").doc(firebase.auth().currentUser.uid).set({
             email: email,
+            received: false
         });
         window.location.href = "index.html";
     } catch (error) {
@@ -77,4 +78,7 @@ async function sendMessage() {
     }catch(error){
         console.error("Error creating task:", error);
     }
+
+    const jar = document.getElementById("jar");
+    jar.src = 'openJar.png';
 }

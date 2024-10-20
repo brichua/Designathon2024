@@ -337,6 +337,25 @@ transform: translateY(1200px);
 
 }
 
+.droppingStar{
+    position: absolute;
+    top: -20px;
+    left: 1550px;
+    color: #ffffff;
+    animation: drop 4s linear forwards;
+    width: 100px;
+    height: 100px;
+    font-size: 100px;
+    font-size-adjust: 2;
+    font-variation-settings:
+    'FILL' 255,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    text-shadow: 0 0 20px white, 0 0 40px white, 0 0 60px white;
+
+}
+
 .risingStar{
     position: absolute;
     top: -20px;
@@ -365,6 +384,21 @@ transform: translateY(1200px);
         transform: translateY(60vh) rotate(360deg);
     }
 }
+
+@keyframes drop {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    90%{
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(60vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
 
 @keyframes rise {
     0% {

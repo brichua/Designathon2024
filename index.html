@@ -117,7 +117,7 @@
         <span id="x" class="material-symbols-outlined">close</span>
     </div>
     <div id="prompt" class="fade"></div>
-    <div id="ping" class="fade"></div>
+    <div id="ping" class="fade">Someone out there is keeping your message in their hearts</div>
     <div class="stars"></div>
     <div class="comet"></div>
     <div class="moving-stars"></div>
@@ -333,73 +333,6 @@ function showPing() {
     pingElement.classList.remove('visible');
   }, 3000);
 }
-
-async function checkCondition() {
-    let conditionMet = false;
-    const userId = firebase.auth().currentUser.uid;
-
-    const userDoc = await db.collection("Users").doc(userId).get();
-    const wishes = userDoc.get('wishes');
-
-    for (let i = 0; i < wishes.length; i++) {
-        if (wishes[i].received === true) {
-            conditionMet = true;
-            wishes[i].received = false;
-
-            await db.collection("Users").doc(userId).update({
-                wishes: wishes
-            });
-        }
-    }
-
-    if (conditionMet) {
-        showPing();
-        conditoinMet = false;
-    }
-}
-
-async function receiveWish(i){
-    var stars = await db.collection("Wishes").doc('allWishes').get().then(doc => doc.get('wish'));
-    const randomIndex = Math.floor(Math.random() * stars.length);
-    console.log(randomIndex );
-    console.log(stars[randomIndex].content);
-    /*if(!imageVisible){
-        const message = document.getElementById('wishMessage');
-        message.classList.add('slide-up');
-    }*/
-
-    let sky = document.getElementById('sky');
-    let wishStars = document.getElementById('wishStar');
-    let e = document.createElement('span');
-    e.id = "newWishMessage"
-    e.addEventListener('click', () => openWish());
-    e.innerHTML = '<span class="fallingStar material-symbols-outlined";>kid_star</span>';
-
-    sky.appendChild(e);
-    message.classList.remove('slide-up');
-    messageButton.classList.remove('slide-up');
-    
-    let id = "star" + i;
-    let doc = document.getElementById(id);
-    wishStars.removeChild(doc);
-
-    const img = document.createElement('img');
-        img.src = 'brightStar.png';
-        img.classList.add('starBright');
-
-        const { x, y } = getRandomPosition(1500, 400, 50, 50);
-        img.style.left = `${x}px`;
-        img.style.top = `${y}px`;
-        img.id = "star" + i;
-
-        (function(index) {
-            img.addEventListener('click', () => receiveWish(index));
-        })(i);
-
-        document.getElementById('wishStar').appendChild(img);
-}
-
-setInterval(checkCondition, 5000);
 
 function openWish(){
         returnBtn.classList.add('slide-up');
