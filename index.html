@@ -42,6 +42,16 @@
       transform: translate(-50%, -50%);
       background-color: rgba(0, 0, 0, 0); /* Transparent area */
     }
+    .jar-hover-area {
+      position: absolute;
+      top: 67%;
+      left: 92%;
+      width: 210px;
+      height: 260px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0); /* Transparent area */
+      z-index: 10;
+    }
     .slide-down {
       transform: translateY(100%);
     }
@@ -64,38 +74,30 @@
     <div class="moon" id="moon"></div>
     <div class="phrase"></div>
     <img id="ground-image" class="ground-image" src="ground.png">
-    <div id="prompt" class="fade">What's something that made you happy today?</div>
-    <div id="ping" class="fade">Someone out there is keeping your star close to their heart</div>
     <img id="new-image" class="new-image" src="table.png">
     <div class="hover-area" id="hover-area"></div> <!-- Hover area -->
+    <div class="jar-hover-area" id="jar-hover-area"></div> <!-- Hover area -->
     <input id="message" class="message" placeholder="Write a star"></input>
     <button id="messageButton" onclick="sendMessage()" class="message-btn btn-block">Fold and Send Star</button>
     <img id="jar" class="jar" src="jar.png">
     <div id="wishStar">
+
     </div>
-    <audio id="background-music" loop autoplay></audio>
     </div>
 
   <script src="index-back.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<script src="main.js"></script>
-<script src="wish.js"></script>
-<script src="music.js"></script>
   <script>
     // JavaScript to change the image on hover
     const groundImage = document.getElementById('ground-image');
     const newImage = document.getElementById('new-image');
     const hoverArea = document.getElementById('hover-area');
+    const jarhoverArea = document.getElementById('jar-hover-area');
+    const jar = document.getElementById('jar');
     const x = document.getElementById('x');
     const message = document.getElementById('message');
     const messageButton = document.getElementById('messageButton');
     let imageVisible = true; // Track which image is visible
+    let jarOpen = false;
     hoverArea.addEventListener('click', () => {
       if (imageVisible) {
         // Slide down the ground image and slide up the new image
@@ -118,6 +120,19 @@
       }
       // Toggle the imageVisible state
       imageVisible = !imageVisible;
+    });
+    jarhoverArea.addEventListener('click', () => {
+      if (!jarOpen){
+        jar.src = 'openJarOutline.png'; // Change this to your new image
+        jarOpen = true;
+      }
+      else{
+        jar.src = 'JarOutline.png'; // Change this to your new image
+        jarOpen = false;
+      }
+      
+      
+     
     });
 
     x.addEventListener('click', () => {
@@ -153,65 +168,32 @@
     hoverArea.addEventListener('mouseout', () => {
       groundImage.src = 'ground.png'; // Revert back to the original image
     });
+    jarhoverArea.addEventListener('mouseover', () => {
+      if(!jarOpen){
+        jar.src = 'jarOutline.png'; // Change this to your new image
+      }
+      else{
+        jar.src = 'openJarOutline.png'; // Change this to your new image
+      }
+    });
 
-    const prompts = [
-  "Remember to take deep breaths!",
-  "Look at the sky and smile!",
-  "You've got this!",
-  "Take a break, you've earned it."
-];
-
-let currentPromptIndex = 0;
-const promptElement = document.getElementById('prompt');
-const pingElement = document.getElementById('ping');
-
-function rotatePrompts() {
-  promptElement.textContent = prompts[currentPromptIndex];
-  promptElement.classList.add('visible');
-
-  setTimeout(() => {
-    promptElement.classList.remove('visible');
-  }, 10000);
-
-  currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
-}
-
-setInterval(rotatePrompts, 120000);
-rotatePrompts();
-
-function showPing() {
-  pingElement.classList.add('visible');
-
-  setTimeout(() => {
-    pingElement.classList.remove('visible');
-  }, 3000);
-}
-
-async function checkCondition() {
-    let conditionMet = false;
-    const userId = firebase.auth().currentUser.uid;
-
-    const userDoc = await db.collection("Users").doc(userId).get();
-    const wishes = userDoc.get('wishes');
-
-    for (let i = 0; i < wishes.length; i++) {
-        if (wishes[i].received === true) {
-            conditionMet = true;
-            wishes[i].received = false;
-
-            await db.collection("Users").doc(userId).update({
-                wishes: wishes
-            });
-        }
-    }
-
-    if (conditionMet) {
-        showPing();
-        conditoinMet = false;
-    }
-}
-
-setInterval(checkCondition, 5000);
+    jarhoverArea.addEventListener('mouseout', () => {
+      if(!jarOpen){
+        jar.src = 'jar.png'; // Change this to your new image
+      }
+      else{
+        jar.src = 'openJar.png'; // Change this to your new image
+      }
+    });
   </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="main.js"></script>
+<script src="wish.js"></script>
 </body>
 </html>
